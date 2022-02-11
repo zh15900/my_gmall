@@ -94,7 +94,21 @@
         <dependency>
             <groupId>com.alibaba.cloud</groupId>
             <artifactId>spring-cloud-starter-alibaba-nacos-discovery</artifactId>
+            <!-- nacos中ribbon会造成loadbalancer包失效 因此要先排除掉 -->
+            <exclusions>
+                <exclusion>
+                    <groupId>org.springframework.cloud</groupId>
+                    <artifactId>spring-cloud-starter-netflix-ribbon</artifactId>
+                </exclusion>
+            </exclusions>
         </dependency>
+
+        <!-- SpringCloud Feign调用在Hoxton.M2 RELEASED版本之后
+       不再使用Ribbon而是使用spring-cloud-loadbalancer -->
+<!--        <dependency>-->
+<!--            <groupId>org.springframework.cloud</groupId>-->
+<!--            <artifactId>spring-cloud-loadbalancer</artifactId>-->
+<!--        </dependency>-->
     </dependencies>
 
     <!-- 下面是依赖管理，相当于以后再dependencies里引spring cloud alibaba就不用写版本号，

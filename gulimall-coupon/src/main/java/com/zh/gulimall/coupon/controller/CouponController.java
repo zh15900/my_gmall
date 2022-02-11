@@ -25,6 +25,14 @@ public class CouponController {
     @Autowired
     private CouponService couponService;
 
+    //测试远程调用
+    @RequestMapping("/member/list")
+    public R membercoupons() {
+        CouponEntity couponEntity = new CouponEntity();
+        couponEntity.setCouponName("满100减10");
+        return R.ok().put("coupon", Arrays.asList(couponEntity));
+    }
+
     /**
      * 列表
      */
@@ -44,7 +52,6 @@ public class CouponController {
     //@RequiresPermissions("coupon:coupon:info")
     public R info(@PathVariable("id") Long id){
 		CouponEntity coupon = couponService.getById(id);
-
         return R.ok().put("coupon", coupon);
     }
 
