@@ -1,0 +1,16 @@
+spring:
+  cloud:
+    gateway:
+      routes:
+        - id: baidu_route
+          uri: http://www.baidu.com
+          predicates:
+            - Query=url,baidu
+
+        - id: test_route
+          uri: http://www.qq.com
+          predicates:
+            - Query=url,qq
+#  http://localhost:90/hello?url=baidu 相当于http://www.baidu.com/hello
+#  http://localhost:90/hello?url=baidu 相当于http://www.qq.com/hello
+#  http://localhost:90?url=baidu
