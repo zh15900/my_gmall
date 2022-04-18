@@ -11,6 +11,25 @@ spring:
           uri: http://www.qq.com
           predicates:
             - Query=url,qq
-#  http://localhost:90/hello?url=baidu 相当于http://www.baidu.com/hello
-#  http://localhost:90/hello?url=baidu 相当于http://www.qq.com/hello
-#  http://localhost:90?url=baidu
+        #  http://localhost:90/hello?url=baidu 相当于http://www.baidu.com/hello
+        #  http://localhost:90/hello?url=baidu 相当于http://www.qq.com/hello
+        #  http://localhost:90?url=baidu
+
+        #product服务,加载按先后顺序,放后面会被renren-fast拦截转发
+        - id: product_route
+          uri: lb://gulimall-product
+          predicates:
+            - Path=/api/product/**
+          filters:
+            #            - RewritePath=/api/pro/(?<segment>.*),/product/$\{segment}
+            - RewritePath=/api/(?<segment>.*),/$\{segment}
+
+        #登录renren-fast
+        - id: admin_route
+          uri: lb://renren-fast # 路由给renren-fast，lb代表负载均衡 renren-fast是nacos上的服务名
+          predicates: # 什么情况下路由给它
+            - Path=/api/** # 默认前端项目都带上api前缀，
+          filters:
+            - RewritePath=/api/(?<segment>.*),/renren-fast/$\{segment} #RewritePath 替换重写
+#  http://localhost:88/api/captcha.jpg  http://localhost:8080/renren-fast/captcha.jpg
+

@@ -17,10 +17,7 @@ import com.zh.common.utils.PageUtils;
 import com.zh.common.utils.R;
 
 
-
 /**
- *
- *
  * @author zenghui
  * @email 3103045176@qq.com
  * @date 2022-02-10 14:18:10
@@ -36,7 +33,7 @@ public class UndoLogController {
      */
     @RequestMapping("/list")
     //@RequiresPermissions("ware:undolog:list")
-    public R list(@RequestParam Map<String, Object> params){
+    public R list(@RequestParam Map<String, Object> params) {
         PageUtils page = undoLogService.queryPage(params);
 
         return R.ok().put("page", page);
@@ -48,8 +45,8 @@ public class UndoLogController {
      */
     @RequestMapping("/info/{id}")
     //@RequiresPermissions("ware:undolog:info")
-    public R info(@PathVariable("id") Long id){
-		UndoLogEntity undoLog = undoLogService.getById(id);
+    public R info(@PathVariable("id") Long id) {
+        UndoLogEntity undoLog = undoLogService.getById(id);
 
         return R.ok().put("undoLog", undoLog);
     }
@@ -59,8 +56,8 @@ public class UndoLogController {
      */
     @RequestMapping("/save")
     //@RequiresPermissions("ware:undolog:save")
-    public R save(@RequestBody UndoLogEntity undoLog){
-		undoLogService.save(undoLog);
+    public R save(@RequestBody UndoLogEntity undoLog) {
+        undoLogService.save(undoLog);
 
         return R.ok();
     }
@@ -70,8 +67,8 @@ public class UndoLogController {
      */
     @RequestMapping("/update")
     //@RequiresPermissions("ware:undolog:update")
-    public R update(@RequestBody UndoLogEntity undoLog){
-		undoLogService.updateById(undoLog);
+    public R update(@RequestBody UndoLogEntity undoLog) {
+        undoLogService.updateById(undoLog);
 
         return R.ok();
     }
@@ -81,8 +78,8 @@ public class UndoLogController {
      */
     @RequestMapping("/delete")
     //@RequiresPermissions("ware:undolog:delete")
-    public R delete(@RequestBody Long[] ids){
-		undoLogService.removeByIds(Arrays.asList(ids));
+    public R delete(@RequestBody Long[] ids) {
+        undoLogService.removeByIds(Arrays.asList(ids));
 
         return R.ok();
     }

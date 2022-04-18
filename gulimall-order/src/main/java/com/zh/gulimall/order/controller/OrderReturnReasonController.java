@@ -17,7 +17,6 @@ import com.zh.common.utils.PageUtils;
 import com.zh.common.utils.R;
 
 
-
 /**
  * 退货原因
  *
@@ -36,7 +35,7 @@ public class OrderReturnReasonController {
      */
     @RequestMapping("/list")
     //@RequiresPermissions("order:orderreturnreason:list")
-    public R list(@RequestParam Map<String, Object> params){
+    public R list(@RequestParam Map<String, Object> params) {
         PageUtils page = orderReturnReasonService.queryPage(params);
 
         return R.ok().put("page", page);
@@ -48,8 +47,8 @@ public class OrderReturnReasonController {
      */
     @RequestMapping("/info/{id}")
     //@RequiresPermissions("order:orderreturnreason:info")
-    public R info(@PathVariable("id") Long id){
-		OrderReturnReasonEntity orderReturnReason = orderReturnReasonService.getById(id);
+    public R info(@PathVariable("id") Long id) {
+        OrderReturnReasonEntity orderReturnReason = orderReturnReasonService.getById(id);
 
         return R.ok().put("orderReturnReason", orderReturnReason);
     }
@@ -59,8 +58,8 @@ public class OrderReturnReasonController {
      */
     @RequestMapping("/save")
     //@RequiresPermissions("order:orderreturnreason:save")
-    public R save(@RequestBody OrderReturnReasonEntity orderReturnReason){
-		orderReturnReasonService.save(orderReturnReason);
+    public R save(@RequestBody OrderReturnReasonEntity orderReturnReason) {
+        orderReturnReasonService.save(orderReturnReason);
 
         return R.ok();
     }
@@ -70,8 +69,8 @@ public class OrderReturnReasonController {
      */
     @RequestMapping("/update")
     //@RequiresPermissions("order:orderreturnreason:update")
-    public R update(@RequestBody OrderReturnReasonEntity orderReturnReason){
-		orderReturnReasonService.updateById(orderReturnReason);
+    public R update(@RequestBody OrderReturnReasonEntity orderReturnReason) {
+        orderReturnReasonService.updateById(orderReturnReason);
 
         return R.ok();
     }
@@ -81,8 +80,8 @@ public class OrderReturnReasonController {
      */
     @RequestMapping("/delete")
     //@RequiresPermissions("order:orderreturnreason:delete")
-    public R delete(@RequestBody Long[] ids){
-		orderReturnReasonService.removeByIds(Arrays.asList(ids));
+    public R delete(@RequestBody Long[] ids) {
+        orderReturnReasonService.removeByIds(Arrays.asList(ids));
 
         return R.ok();
     }

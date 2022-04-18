@@ -6,12 +6,12 @@ import org.apache.ibatis.annotations.Mapper;
 
 /**
  * 优惠券分类关联
- * 
+ *
  * @author zenghui
  * @email 3103045176@qq.com
  * @date 2022-02-10 14:11:55
  */
 @Mapper
 public interface CouponSpuCategoryRelationDao extends BaseMapper<CouponSpuCategoryRelationEntity> {
-	
+
 }

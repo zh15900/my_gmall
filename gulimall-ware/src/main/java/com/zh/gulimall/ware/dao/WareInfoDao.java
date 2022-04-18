@@ -6,12 +6,12 @@ import org.apache.ibatis.annotations.Mapper;
 
 /**
  * 仓库信息
- * 
+ *
  * @author zenghui
  * @email 3103045176@qq.com
  * @date 2022-02-10 14:18:10
  */
 @Mapper
 public interface WareInfoDao extends BaseMapper<WareInfoEntity> {
-	
+
 }

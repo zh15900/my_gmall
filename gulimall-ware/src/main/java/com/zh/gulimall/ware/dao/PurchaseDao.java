@@ -6,12 +6,12 @@ import org.apache.ibatis.annotations.Mapper;
 
 /**
  * 采购信息
- * 
+ *
  * @author zenghui
  * @email 3103045176@qq.com
  * @date 2022-02-10 14:18:10
  */
 @Mapper
 public interface PurchaseDao extends BaseMapper<PurchaseEntity> {
-	
+
 }

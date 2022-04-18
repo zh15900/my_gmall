@@ -6,12 +6,12 @@ import org.apache.ibatis.annotations.Mapper;
 
 /**
  * 会员收藏的商品
- * 
+ *
  * @author zenghui
  * @email 3103045176@qq.com
  * @date 2022-02-10 14:16:46
  */
 @Mapper
 public interface MemberCollectSpuDao extends BaseMapper<MemberCollectSpuEntity> {
-	
+
 }
