@@ -1,10 +1,9 @@
 package com.zh.gulimall.product.service.impl;
 
+import com.zh.gulimall.product.service.CategoryBrandRelationService;
 import org.springframework.stereotype.Service;
 
-import java.util.Comparator;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.stream.Collectors;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
@@ -17,9 +16,14 @@ import com.zh.gulimall.product.dao.CategoryDao;
 import com.zh.gulimall.product.entity.CategoryEntity;
 import com.zh.gulimall.product.service.CategoryService;
 
+import javax.annotation.Resource;
+
 
 @Service
 public class CategoryServiceImpl extends ServiceImpl<CategoryDao, CategoryEntity> implements CategoryService {
+
+    @Resource
+    private CategoryBrandRelationService categoryBrandRelationService;
 
     @Override
     public PageUtils queryPage(Map<String, Object> params) {
@@ -48,6 +52,44 @@ public class CategoryServiceImpl extends ServiceImpl<CategoryDao, CategoryEntity
     public void removeMenuByIds(List<Long> asList) {
         //TODO 1 检查当前的菜单是否被别的地方所引用
         baseMapper.deleteBatchIds(asList);
+    }
+
+    @Override
+    public Long[] findCatelogPath(Long catelogId) {
+        List<Long> paths = new ArrayList<>();
+
+        //递归查询是否还有父节点
+        List<Long> parentPath = findParentPath(catelogId, paths);
+
+        //进行一个逆序排列
+        Collections.reverse(parentPath);
+
+        return (Long[]) parentPath.toArray(new Long[parentPath.size()]);
+    }
+
+    /**
+     * 级联更新所有关联的数据
+     * @param category
+     */
+    @Override
+    public void updateCascade(CategoryEntity category) {
+        this.updateById(category);
+        categoryBrandRelationService.updateCategory(category.getCatId(),category.getName());
+
+    }
+
+    private List<Long> findParentPath(Long catelogId, List<Long> paths) {
+        //1、收集当前节点id
+        paths.add(catelogId);
+
+        //根据当前分类id查询信息
+        CategoryEntity byId = this.getById(catelogId);
+        //如果当前不是父分类
+        if (byId.getParentCid() != 0) {
+            findParentPath(byId.getParentCid(), paths);
+        }
+
+        return paths;
     }
 
     // 递归查找所有菜单的子菜单

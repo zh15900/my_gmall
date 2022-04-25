@@ -4,9 +4,10 @@ spring:
     url: jdbc:mysql://localhost:3306/gulimall_pms?useUnicode=true&characterEncoding=UTF-8&useSSL=false&serverTimezone=Asia/Shanghai
     username: root
     password: 123456
+  #注册服务
   cloud:
     nacos:
-      config:
+      discovery:
         server-addr: 127.0.0.1:8848
   application:
     name: gulimall-product
@@ -18,9 +19,9 @@ mybatis-plus:
   global-config:
     db-config:
       id-type: auto
-      logic-delete-field: showStatus
-      logic-delete-value: 0 # 逻辑已删除值(默认为 1)
-      logic-not-delete-value: 1 # 逻辑未删除值(默认为 0)
+      logic-delete-field: delFlag
+      logic-delete-value: 1 # 逻辑已删除值(默认为 1)
+      logic-not-delete-value: 0 # 逻辑未删除值(默认为 0)
 server:
   port: 10000
 logging:

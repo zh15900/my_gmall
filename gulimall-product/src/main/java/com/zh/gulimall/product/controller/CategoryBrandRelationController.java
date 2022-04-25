@@ -1,5 +1,6 @@
 package com.zh.gulimall.product.controller;
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.zh.common.utils.PageUtils;
 import com.zh.common.utils.R;
 import com.zh.gulimall.product.entity.CategoryBrandRelationEntity;
@@ -8,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Arrays;
+import java.util.List;
 import java.util.Map;
 
 
@@ -25,15 +27,18 @@ public class CategoryBrandRelationController {
     private CategoryBrandRelationService categoryBrandRelationService;
 
     /**
-     * 列表
+     * 获取当前品牌关联的所有分类列表列表
      */
-    @RequestMapping("/list")
+    @GetMapping(value = "/catelog/list")
     //@RequiresPermissions("product:categorybrandrelation:list")
-    public R list(@RequestParam Map<String, Object> params) {
-        PageUtils page = categoryBrandRelationService.queryPage(params);
+    public R catelogList(@RequestParam Map<String, Object> params,@RequestParam("brandId") Long brandId){
 
-        return R.ok().put("page", page);
+        List<CategoryBrandRelationEntity> data = categoryBrandRelationService.
+                list(new QueryWrapper<CategoryBrandRelationEntity>().eq("brand_id",brandId));
+
+        return R.ok().put("data", data);
     }
+
 
 
     /**
@@ -52,8 +57,9 @@ public class CategoryBrandRelationController {
      */
     @RequestMapping("/save")
     //@RequiresPermissions("product:categorybrandrelation:save")
-    public R save(@RequestBody CategoryBrandRelationEntity categoryBrandRelation) {
-        categoryBrandRelationService.save(categoryBrandRelation);
+    public R save(@RequestBody CategoryBrandRelationEntity categoryBrandRelation){
+
+        categoryBrandRelationService.saveDetail(categoryBrandRelation);
 
         return R.ok();
     }

@@ -1,6 +1,5 @@
 package com.zh.gulimall.product.controller;
 
-import com.zh.common.utils.PageUtils;
 import com.zh.common.utils.R;
 import com.zh.gulimall.product.entity.CategoryEntity;
 import com.zh.gulimall.product.service.CategoryService;
@@ -9,7 +8,6 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.Arrays;
 import java.util.List;
-import java.util.Map;
 
 
 /**
@@ -59,15 +57,25 @@ public class CategoryController {
         return R.ok();
     }
 
+//    /**
+//     * 修改
+//     */
+//    @RequestMapping("/update")
+//    //@RequiresPermissions("product:category:update")
+//    public R update(@RequestBody CategoryEntity category) {
+//        categoryService.updateById(category);
+//        return R.ok();
+//    }
     /**
      * 修改
      */
     @RequestMapping("/update")
     //@RequiresPermissions("product:category:update")
     public R update(@RequestBody CategoryEntity category) {
-        categoryService.updateById(category);
+        categoryService.updateCascade(category);
         return R.ok();
     }
+
 
     @RequestMapping("/update/sort")
     //@RequiresPermissions("product:category:update")

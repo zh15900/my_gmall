@@ -1,0 +1,23 @@
+spring:
+  application:
+    name: gulimall-gateway
+  cloud:
+    nacos:
+      #服务中心
+      discovery:
+        server-addr: 127.0.0.1:8848
+      #配置中心
+      config:
+        server-addr: 127.0.0.1:8848
+        namespace: 19d1f700-7538-4d5e-b8e8-c0a9f009f014
+#        file-extension: yml
+#        refresh-enabled: true
+        #指定配置文件
+        extension-configs[0]:
+          data-id: guilmall-gateway.yml
+          group: DEFAULT_GROUP
+          refresh: true
+
+
+#server:
+#  port: 90

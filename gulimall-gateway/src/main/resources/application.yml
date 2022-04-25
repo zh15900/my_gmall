@@ -21,8 +21,16 @@ spring:
           predicates:
             - Path=/api/product/**
           filters:
-            #            - RewritePath=/api/pro/(?<segment>.*),/product/$\{segment}
+            #- RewritePath=/api/pro/(?<segment>.*),/product/$\{segment}
             - RewritePath=/api/(?<segment>.*),/$\{segment}
+
+        #第三方服务 文件上传接口
+        - id: third_party_route
+          uri: lb://gulimall-third-party
+          predicates:
+            - Path=/api/thirdparty/**
+          filters:
+            - RewritePath=/api/thirdparty/(?<segment>/?.*),/$\{segment}
 
         #登录renren-fast
         - id: admin_route
